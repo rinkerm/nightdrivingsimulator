@@ -42,13 +42,12 @@ public class Car : MonoBehaviour
             wrb.transform.Rotate(0, -5, 0);
 
         }
-        else if(dir == 2)
+        else if(dir == -1)
         {
             wlf.transform.Rotate(0, -5, 0);
             wrf.transform.Rotate(0, 5, 0);
             wlb.transform.Rotate(0, -5, 0);
             wrb.transform.Rotate(0, 5, 0);
-
         }
 
         if (Input.GetKey(KeyCode.W))
@@ -59,9 +58,9 @@ public class Car : MonoBehaviour
         }
         else if (Input.GetKey(KeyCode.S))
         {
-            if(speed < 100)
+            if(speed > -40)
                 rb.velocity += -(transform.forward * forwardForce);
-            dir = 2;
+            dir = -1;
         }
 
 
@@ -112,6 +111,7 @@ public class Car : MonoBehaviour
         */
         velocity = rb.velocity;
         speed = System.Math.Sqrt((velocity.x * velocity.x) + (velocity.z*velocity.z));
+        speed = speed * dir;
     }
 
 

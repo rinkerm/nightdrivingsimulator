@@ -4,6 +4,10 @@ using UnityEngine;
 
 public class Car : MonoBehaviour
 {
+    //=========================================================
+    // Declarations
+    //=========================================================
+
     [SerializeField] Rigidbody rb;
     public float forwardForce = 1f;
     public float slideForce = 100f;
@@ -12,13 +16,16 @@ public class Car : MonoBehaviour
     public double speed;
     public int dir;
     public int xrotation;
-
     [SerializeField] Camera _camera;
     [SerializeField] GameObject wlf;
     [SerializeField] GameObject wlb;
     [SerializeField] GameObject wrf;
     [SerializeField] GameObject wrb;
-    // Start is called before the first frame update
+
+
+    //=========================================================
+    // Start()
+    //=========================================================
     void Start()
     {
         xrotation = 0;
@@ -27,7 +34,9 @@ public class Car : MonoBehaviour
         velocity = rb.velocity;
     }
 
-    // Update is called once per frame
+    //=========================================================
+    // Update()
+    //=========================================================
     void Update()
     {
         if(speed < 1)
@@ -52,14 +61,12 @@ public class Car : MonoBehaviour
 
         if (Input.GetKey(KeyCode.W))
         {
-            if(speed<100)
-                rb.velocity += transform.forward * forwardForce;
+            if (speed < 100) { rb.velocity += transform.forward * forwardForce; }
             dir = 1;
         }
         else if (Input.GetKey(KeyCode.S))
         {
-            if(speed > -40)
-                rb.velocity += -(transform.forward * forwardForce);
+            if (speed > -40) { rb.velocity += -(transform.forward * forwardForce); }
             dir = -1;
         }
 

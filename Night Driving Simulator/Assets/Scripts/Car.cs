@@ -9,7 +9,7 @@ public class Car : MonoBehaviour
     //=========================================================
 
     [SerializeField] Rigidbody rb;
-    public float forwardForce = 1f;
+    public float forwardForce = .2f;
     public float slideForce = 100f;
     public float rotationForce = 0.8f;
     public Vector3 velocity;
@@ -61,12 +61,12 @@ public class Car : MonoBehaviour
 
         if (Input.GetKey(KeyCode.W))
         {
-            if (speed < 100) { rb.velocity += transform.forward * forwardForce; }
+            if (speed < 60) { rb.velocity += transform.forward * forwardForce; }
             dir = 1;
         }
         else if (Input.GetKey(KeyCode.S))
         {
-            if (speed > -40) { rb.velocity += -(transform.forward * forwardForce); }
+            if (speed > -20) { rb.velocity += -(transform.forward * forwardForce); }
             dir = -1;
         }
 

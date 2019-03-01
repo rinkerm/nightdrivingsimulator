@@ -15,6 +15,8 @@ public class Player_Status : MonoBehaviour
     private float fatigue = 0;
     private int timer = 0;
     private int fatigue_threshold = 150;
+
+
     // Start is called before the first frame update
     void Start()
     {

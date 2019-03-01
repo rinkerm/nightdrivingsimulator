@@ -9,7 +9,7 @@ public class Car : MonoBehaviour
     //=========================================================
 
     [SerializeField] Rigidbody rb;
-    public float forwardForce = .2f;
+    public float forwardForce = 1f;
     public float slideForce = 100f;
     public float rotationForce = 0.8f;
     public Vector3 velocity;
@@ -17,6 +17,8 @@ public class Car : MonoBehaviour
     public int dir;
     public int xrotation;
     [SerializeField] Camera _camera;
+    [SerializeField] GameObject lrotator;
+    [SerializeField] GameObject rrotator;
     [SerializeField] GameObject wlf;
     [SerializeField] GameObject wlb;
     [SerializeField] GameObject wrf;
@@ -39,23 +41,23 @@ public class Car : MonoBehaviour
     //=========================================================
     void Update()
     {
-        if(speed < 1)
+        if(speed < 1 && speed >-1)
         {
             dir = 0;
         }
-        if(dir == 1)
+        else if(dir == 1)
         {
-            wlf.transform.Rotate(0, 5, 0);
+            wlf.transform.Rotate(0, -5, 0);
             wrf.transform.Rotate(0, -5, 0);
-            wlb.transform.Rotate(0, 5, 0);
+            wlb.transform.Rotate(0, -5, 0);
             wrb.transform.Rotate(0, -5, 0);
 
         }
         else if(dir == -1)
         {
-            wlf.transform.Rotate(0, -5, 0);
+            wlf.transform.Rotate(0, 5, 0);
             wrf.transform.Rotate(0, 5, 0);
-            wlb.transform.Rotate(0, -5, 0);
+            wlb.transform.Rotate(0, 5, 0);
             wrb.transform.Rotate(0, 5, 0);
         }
 
@@ -66,7 +68,7 @@ public class Car : MonoBehaviour
         }
         else if (Input.GetKey(KeyCode.S))
         {
-            if (speed > -20) { rb.velocity += -(transform.forward * forwardForce); }
+            if (speed > -40) { rb.velocity += -(transform.forward * forwardForce); }
             dir = -1;
         }
 
@@ -74,48 +76,48 @@ public class Car : MonoBehaviour
         if (Input.GetKey(KeyCode.D))
         {
             transform.Rotate(0, rotationForce, 0);
-            /*
-            if(xrotation < 20)
+
+            if(xrotation < 15)
             {
-                wlf.transform.Rotate(1, 0, 0);
-                wrf.transform.Rotate(1, 0, 0);
+                lrotator.transform.Rotate(1, 0, 0);
+                rrotator.transform.Rotate(1, 0, 0);
                 xrotation += 1;
             }
-            */
+
 
         }
         else if (Input.GetKey(KeyCode.A))
         {
             transform.Rotate(0, -rotationForce, 0);
-            /*
-            if (xrotation > -20)
+
+            if (xrotation > -15)
             {
-                wlf.transform.Rotate(-1, 0, 0);
-                wrf.transform.Rotate(-1, 0, 0);
+                lrotator.transform.Rotate(-1, 0, 0);
+                rrotator.transform.Rotate(-1, 0, 0);
                 xrotation -= 1;
             }
-            */
+
         }
-        /*
+
         else
         {
             if (xrotation != 0)
             {
                 if(xrotation < 0)
                 {
-                    wlf.transform.Rotate(1, 0, 0);
-                    wrf.transform.Rotate(1, 0, 0);
+                    lrotator.transform.Rotate(1, 0, 0);
+                    rrotator.transform.Rotate(1, 0, 0);
                     xrotation += 1;
                 }
                 else
                 {
-                    wlf.transform.Rotate(-1, 0, 0);
-                    wrf.transform.Rotate(-1, 0, 0);
+                    lrotator.transform.Rotate(-1, 0, 0);
+                    rrotator.transform.Rotate(-1, 0, 0);
                     xrotation -= 1;
                 }
             }
         }
-        */
+
         velocity = rb.velocity;
         speed = System.Math.Sqrt((velocity.x * velocity.x) + (velocity.z*velocity.z));
         speed = speed * dir;

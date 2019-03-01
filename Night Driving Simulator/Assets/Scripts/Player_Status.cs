@@ -6,13 +6,13 @@ public class Player_Status : MonoBehaviour
 {
     [SerializeField] GameObject top_eyelid;
     [SerializeField] GameObject bottom_eyelid;
-    private float b_speed = .25f;
+    public float b_speed = .25f;
     private int b_direction = -1;
-    private float b_time = 0.1f;
+    public float b_time = 0.1f;
     private int b_timer = 0;
     private int b_threshhold = 600;
     private bool blinking = false;
-    private int fatigue = 0;
+    private float fatigue = 0;
     private int timer = 0;
     private int fatigue_threshold = 150;
     // Start is called before the first frame update
@@ -49,8 +49,8 @@ public class Player_Status : MonoBehaviour
                 b_timer++;
             }
         }
-        b_time = 0.1f + (fatigue / 50);
-        b_speed = System.Math.Max(.25f - (fatigue / 75),.01f);
+        b_time = 0.1f + (fatigue / 175);
+        b_speed = System.Math.Max(.25f - (fatigue / 425),.01f);
     }
 
     IEnumerator blink()

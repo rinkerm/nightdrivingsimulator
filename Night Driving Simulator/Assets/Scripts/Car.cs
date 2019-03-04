@@ -41,6 +41,8 @@ public class Car : MonoBehaviour
     //=========================================================
     void Update()
     {
+        Debug.Log(speed.ToString());
+
         if(speed < 1 && speed >-1)
         {
             dir = 0;
@@ -61,16 +63,67 @@ public class Car : MonoBehaviour
             wrb.transform.Rotate(0, 5, 0);
         }
 
+        // downward force
+        rb.AddRelativeForce(Vector3.down * 2);
+
+        // help maintain cruise speed
+        if (speed >= 25 && speed < 40)
+        {
+            rb.velocity += transform.forward * forwardForce/3 * Time.deltaTime; 
+            dir = 1;
+        }
+        else if (speed >= 40 && speed < 50)
+        {
+            rb.velocity += transform.forward * forwardForce/2 * Time.deltaTime; 
+            dir = 1;
+        }
+        else if (speed >= 50 && speed < 65)
+        {
+            rb.velocity += transform.forward * forwardForce/3 * Time.deltaTime; 
+            dir = 1;
+        }
+
+        // different speeds for better handeling
         if (Input.GetKey(KeyCode.W))
         {
-            if (speed < 60) { rb.velocity += transform.forward * forwardForce; }
-            dir = 1;
+            if (speed < 10) 
+            { 
+                rb.velocity += transform.forward * forwardForce * Time.deltaTime;
+                dir = 1;
+            }
+            else if (speed >= 10 && speed < 30)
+            {
+                rb.velocity += transform.forward * forwardForce/2 * Time.deltaTime; 
+                dir = 1;
+            }
+            else if (speed >= 30 && speed < 35)
+            {
+                rb.velocity += transform.forward * forwardForce/4 * Time.deltaTime; 
+                dir = 1;
+            }
+            else if (speed >= 35 && speed < 50)
+            {
+                rb.velocity += transform.forward * forwardForce/5 * Time.deltaTime; 
+                dir = 1;
+            }
+            else if (speed >= 50 && speed < 55)
+            {
+                rb.velocity += transform.forward * forwardForce/3 * Time.deltaTime; 
+                dir = 1;
+            }
+            else if (speed >= 55 && speed < 65) //superspeed sound effect?
+            {
+                rb.velocity += transform.forward * forwardForce/2 * Time.deltaTime; 
+                dir = 1;
+            }
+      
         }
         else if (Input.GetKey(KeyCode.S))
         {
-            if (speed > -40) { rb.velocity += -(transform.forward * forwardForce); }
+            if (speed > -20) { rb.velocity += -(transform.forward * forwardForce/4 * Time.deltaTime); }
             dir = -1;
         }
+
 
 
         if (Input.GetKey(KeyCode.D))
@@ -98,7 +151,6 @@ public class Car : MonoBehaviour
             }
 
         }
-
         else
         {
             if (xrotation != 0)

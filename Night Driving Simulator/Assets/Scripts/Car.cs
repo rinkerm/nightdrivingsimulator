@@ -10,7 +10,6 @@ public class Car : MonoBehaviour
 
     [SerializeField] Rigidbody rb;
     public float forwardForce = 1f;
-    public float slideForce = 100f;
     public float rotationForce = 0.8f;
     public Vector3 velocity;
     public double speed;
@@ -64,56 +63,25 @@ public class Car : MonoBehaviour
         }
 
         // downward force
-        rb.AddRelativeForce(Vector3.down * 20);
+        rb.AddRelativeForce(Vector3.down * 1000);
 
         // help maintain cruise speed
-        if (speed >= 10 && speed < 20)
+        if (speed >= 10 && speed < 15)
         {
-            rb.velocity += transform.forward * forwardForce/3 * Time.deltaTime; 
+            rb.velocity += transform.forward * forwardForce/10 * Time.deltaTime; 
             dir = 1;
         }
-        else if (speed >= 20 && speed < 30)
+        else if (speed >= 15 && speed < 20)
         {
-            rb.velocity += transform.forward * forwardForce/2 * Time.deltaTime; 
+            rb.velocity += transform.forward * forwardForce/7 * Time.deltaTime; 
             dir = 1;
         }
-        else if (speed >= 29 && speed < 40)
-        {
-            rb.velocity += transform.forward * forwardForce/3 * Time.deltaTime; 
-            dir = 1;
-        }
-
-        // different speeds for better handeling
+        
         if (Input.GetKey(KeyCode.W))
         {
-            if (speed < 5) //start speed
+            if (speed < 40)
             { 
                 rb.velocity += transform.forward * forwardForce * Time.deltaTime;
-                dir = 1;
-            }
-            else if (speed >= 5 && speed < 10) //low 
-            {
-                rb.velocity += transform.forward * forwardForce/2 * Time.deltaTime; 
-                dir = 1;
-            }
-            else if (speed >= 10 && speed < 20) // coast
-            {
-                rb.velocity += transform.forward * forwardForce/4 * Time.deltaTime; 
-                dir = 1;
-            }
-            else if (speed >= 20 && speed < 29) //high coast
-            {
-                rb.velocity += transform.forward * forwardForce/5 * Time.deltaTime; 
-                dir = 1;
-            }
-            else if (speed >= 29 && speed < 35) //high
-            {
-                rb.velocity += transform.forward * forwardForce/2 * Time.deltaTime; 
-                dir = 1;
-            }
-            else if (speed >= 35 && speed < 40) //max
-            {
-                rb.velocity += transform.forward * forwardForce * Time.deltaTime; 
                 dir = 1;
             }
       

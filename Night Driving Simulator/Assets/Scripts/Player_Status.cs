@@ -26,10 +26,10 @@ public class Player_Status : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        Debug.Log(fatigue);
         if(timer > fatigue_threshold)
         {
             fatigue++;
-            Debug.Log(fatigue);
             timer = 0;
         }
         if (fatigue > 100)
@@ -73,6 +73,10 @@ public class Player_Status : MonoBehaviour
         }
         blinking = false;
     }
- 
+
+    public void LowerFatigue()
+    {
+        fatigue = System.Math.Max(0, fatigue - 10);
+    }
     
 }

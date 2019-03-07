@@ -4,15 +4,26 @@ using UnityEngine;
 
 public class Window : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    public Player_Status p_status;
+    private Color startcolor = Color.white;
+
+    void OnMouseEnter()
     {
-        
+        GetComponent<Renderer>().material.SetColor("_Color", Color.blue);
+
+    }
+    void OnMouseExit()
+    {
+        GetComponent<Renderer>().material.SetColor("_Color", startcolor);
+    }
+    void OnMouseDown()
+    {
+        MoveWindow();
     }
 
-    // Update is called once per frame
-    void Update()
+    void MoveWindow()
     {
-        
+        //translatewindow
+        p_status.LowerFatigue();
     }
 }

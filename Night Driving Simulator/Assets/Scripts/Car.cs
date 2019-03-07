@@ -41,7 +41,6 @@ public class Car : MonoBehaviour
     //=========================================================
     void Update()
     {
-        Debug.Log(speed.ToString());
 
         if(speed < 1 && speed >-1)
         {

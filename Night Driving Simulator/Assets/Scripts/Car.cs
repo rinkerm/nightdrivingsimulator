@@ -40,6 +40,9 @@ public class Car : MonoBehaviour
     //=========================================================
     void Update()
     {
+        //constant downward force for stability
+        rb.AddRelativeForce(Vector3.down * 1000);
+        //display speed to terminal
         Debug.Log(speed.ToString());
 
         if(speed < 1 && speed >-1)
@@ -60,28 +63,9 @@ public class Car : MonoBehaviour
             wrf.transform.Rotate(0, 5, 0);
             wlb.transform.Rotate(0, 5, 0);
             wrb.transform.Rotate(0, 5, 0);
-        }
+        }    
 
-        // downward force
-        rb.AddRelativeForce(Vector3.down * 1000);
-
-        // help maintain cruise speed
-        if (speed >= 10 && speed < 20)
-        {
-            rb.velocity += transform.forward * forwardForce/4 * Time.deltaTime; 
-            dir = 1;
-        }
-        else if (speed >= 20 && speed < 25)
-        {
-            rb.velocity += transform.forward * forwardForce/3 * Time.deltaTime; 
-            dir = 1;
-        }
-        else if (speed >= 25 && speed < 30)
-        {
-            rb.velocity += transform.forward * forwardForce/2 * Time.deltaTime; 
-            dir = 1;
-        }
-        
+        // FORWARD
         if (Input.GetKey(KeyCode.W))
         {
             if (speed < 5)
@@ -89,21 +73,46 @@ public class Car : MonoBehaviour
                 rb.velocity += transform.forward * (forwardForce/2 + forwardForce/5) * Time.deltaTime;
                 dir = 1;
             }
-            else if (speed >= 5 && speed < 40)
+            else if (speed >= 5 && speed < 10)
             { 
-                rb.velocity += transform.forward * forwardForce * Time.deltaTime;
+                rb.velocity += transform.forward * (forwardForce/2 + forwardForce/4) * Time.deltaTime;
+                dir = 1;
+            }
+            else if (speed >= 10 && speed < 20)
+            { 
+                rb.velocity += transform.forward * forwardForce/4  * Time.deltaTime;
+                dir = 1;
+            }
+            else if (speed >= 20 && speed < 40)
+            { 
+                rb.velocity += transform.forward * forwardForce/5 * Time.deltaTime;
                 dir = 1;
             }
       
         }
+        // BACKWARD
         else if (Input.GetKey(KeyCode.S))
         {
             if (speed > -10) { rb.velocity += -(transform.forward * forwardForce * Time.deltaTime); }
             dir = -1;
         }
-
-
-
+        // CRUISE SPEED
+        if (speed >= 5 && speed < 10)
+        {
+            rb.velocity += transform.forward * forwardForce/3 * Time.deltaTime; 
+            dir = 1;
+        }
+        else if (speed >= 10 && speed < 25)
+        {
+           rb.velocity += transform.forward * (forwardForce/2 + forwardForce/3) * Time.deltaTime; 
+            dir = 1;
+        }
+        else if (speed >= 25 && speed < 30)
+        {
+            rb.velocity += transform.forward * forwardForce * Time.deltaTime; 
+            dir = 1;
+        }
+        // RIGHT
         if (Input.GetKey(KeyCode.D))
         {
             transform.Rotate(0, rotationForce, 0);
@@ -114,9 +123,8 @@ public class Car : MonoBehaviour
                 rrotator.transform.Rotate(1, 0, 0);
                 xrotation += 1;
             }
-
-
         }
+        // LEFT
         else if (Input.GetKey(KeyCode.A))
         {
             transform.Rotate(0, -rotationForce, 0);
@@ -129,6 +137,7 @@ public class Car : MonoBehaviour
             }
 
         }
+        // CONSTANT
         else
         {
             if (xrotation != 0)

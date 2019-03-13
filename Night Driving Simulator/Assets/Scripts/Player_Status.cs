@@ -26,7 +26,7 @@ public class Player_Status : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Debug.Log(fatigue);
+        //Debug.Log(fatigue);
         if(timer > fatigue_threshold)
         {
             fatigue++;

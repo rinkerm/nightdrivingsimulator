@@ -43,7 +43,7 @@ public class Car : MonoBehaviour
         //constant downward force for stability
         rb.AddRelativeForce(Vector3.down * 1000);
         //display speed to terminal
-        Debug.Log(speed.ToString());
+        //Debug.Log(speed.ToString());
 
         if(speed < 1 && speed >-1)
         {

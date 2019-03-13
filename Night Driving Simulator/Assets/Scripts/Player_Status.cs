@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Player_Status : MonoBehaviour
 {
@@ -17,6 +18,7 @@ public class Player_Status : MonoBehaviour
     private float fatigue = 0;
     private int timer = 0;
     private int fatigue_threshold = 60;
+    public bool closed;
 
 
     //=========================================================
@@ -65,6 +67,11 @@ public class Player_Status : MonoBehaviour
         fullTex = new Texture2D(1, 1);
         fullTex.SetPixel(0, 0, Color.white);
         fullTex.Apply();
+
+        top_eyelid.transform.Translate(new Vector3(0, -.25f, 0), Space.Self);
+        bottom_eyelid.transform.Translate(new Vector3(0, .25f, 0), Space.Self);
+        closed = true;
+        StartCoroutine(open());
     }
 
     //=========================================================
@@ -72,34 +79,42 @@ public class Player_Status : MonoBehaviour
     //=========================================================
     void Update()
     {
-        barDisplay = fatigue*0.01f;
-        //Debug.Log(fatigue);
-        if (timer * Time.deltaTime > fatigue_threshold * Time.deltaTime)
+        if (!closed)
         {
-            fatigue++;
-            timer = 0;
-        }
-        if (fatigue > 100)
-        {
-            fatigue = 100;
-            //game over
-        }
-        timer++;
-        if(!blinking)
-        { 
-            if(b_timer > b_threshhold)
+            if (fatigue >= 100)
             {
-                StartCoroutine(blink());
+                fatigue = 100;
+                StartCoroutine(close());
+            }
+            barDisplay = fatigue*0.01f;
+            //Debug.Log(fatigue);
+            if (timer * Time.deltaTime > fatigue_threshold * Time.deltaTime)
+            {
+                fatigue++;
+                timer = 0;
+            }
+            
+            timer++;
+            if(!blinking)
+            { 
+                if(b_timer > b_threshhold)
+                {
+                    StartCoroutine(blink());
                 
-                b_timer = 0;
+                    b_timer = 0;
+                }
+                else
+                {
+                    b_timer++;
+                }
             }
-            else
-            {
-                b_timer++;
-            }
+            b_time = 0.1f + (fatigue / 175);
+            b_speed = System.Math.Max(.25f - (fatigue / 425),.01f);
         }
-        b_time = 0.1f + (fatigue / 175);
-        b_speed = System.Math.Max(.25f - (fatigue / 425),.01f);
+        if (fatigue >= 100)
+        {
+            StartCoroutine(close());
+        }
     }
 
     //=========================================================
@@ -122,6 +137,41 @@ public class Player_Status : MonoBehaviour
             yield return 0;
         }
         blinking = false;
+        if(fatigue >= 100)
+        {
+            StartCoroutine(close());
+        }
+    }
+
+    //=========================================================
+    // Open
+    //=========================================================
+    IEnumerator open()
+    {
+        yield return new WaitForSeconds(0.5f);
+        while (top_eyelid.transform.localPosition.y < .5)
+        {
+            top_eyelid.transform.Translate(new Vector3(0, b_speed * Time.deltaTime, 0), Space.Self);
+            bottom_eyelid.transform.Translate(new Vector3(0, -b_speed * Time.deltaTime, 0), Space.Self);
+            yield return 0;
+        }
+        closed = false;
+    }
+
+    //=========================================================
+    // Close
+    //=========================================================
+    IEnumerator close()
+    {
+        blinking = true;
+        while (top_eyelid.transform.localPosition.y > .25)
+        {
+            top_eyelid.transform.Translate(new Vector3(0, -b_speed * Time.deltaTime, 0), Space.Self);
+            bottom_eyelid.transform.Translate(new Vector3(0, b_speed * Time.deltaTime, 0), Space.Self);
+            yield return 0;
+        }
+        closed = true;
+        SceneManager.LoadScene("gameover");
     }
 
     //=========================================================

@@ -14592,6 +14592,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2d0a84ad9ce2d7a4b9942a164da996e6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  barDisplay: 0
+  pos: {x: 150, y: 500}
+  size: {x: 60, y: 20}
+  emptyTex: {fileID: 0}
+  fullTex: {fileID: 0}
   p_status: {fileID: 1038650085}
 --- !u!54 &858564728
 Rigidbody:
@@ -15368,6 +15373,7 @@ MonoBehaviour:
   bottom_eyelid: {fileID: 216965887}
   b_speed: 0.5
   b_time: 0.1
+  closed: 0
   barDisplay: 0
   pos: {x: 20, y: 500}
   size: {x: 120, y: 20}
@@ -34956,7 +34962,7 @@ Light:
   serializedVersion: 8
   m_Type: 1
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Intensity: 0.1
+  m_Intensity: 0.3
   m_Range: 10
   m_SpotAngle: 30
   m_CookieSize: 10
@@ -36741,6 +36747,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8eb13c6fe8732864ba8e9e6c1fac164a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  barDisplay: 0
+  pos: {x: 240, y: 500}
+  size: {x: 60, y: 20}
+  emptyTex: {fileID: 0}
+  fullTex: {fileID: 0}
   p_status: {fileID: 1038650085}
 --- !u!54 &1489405903
 Rigidbody:
@@ -37884,6 +37895,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: be751ed6dcfc71149892813ecc3d7863, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  barDisplay: 0
+  pos: {x: 330, y: 500}
+  size: {x: 60, y: 20}
+  emptyTex: {fileID: 0}
+  fullTex: {fileID: 0}
   p_status: {fileID: 1038650085}
 --- !u!114 &1597029495
 MonoBehaviour:

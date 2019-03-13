@@ -4,8 +4,10 @@ using UnityEngine;
 
 public class Coffee : MonoBehaviour
 {
-    
 
+    //=========================================================
+    // GUI Stuff
+    //=========================================================
     public float barDisplay; //current progress
     public Vector2 pos = new Vector2(150, 500);
     public Vector2 size = new Vector2(60, 20);
@@ -41,11 +43,17 @@ public class Coffee : MonoBehaviour
         GUI.EndGroup();
     }
 
-
+    //=========================================================
+    // Declarations
+    //=========================================================
     private Color startcolor = Color.white;
     public Player_Status p_status;
     private float coffeeCD = 0f;
     private int coffeeCDL = 15;
+
+    //=========================================================
+    // Mouse Click Stuff
+    //=========================================================
     void OnMouseEnter()
     {
         GetComponent<Renderer>().material.SetColor("_Color", Color.blue);
@@ -60,12 +68,18 @@ public class Coffee : MonoBehaviour
         DrinkCoffee();
     }
 
+    //=========================================================
+    // Update
+    //=========================================================
     void Update()
     {
         barDisplay = coffeeCD / 15f;
         coffeeCD -= Time.deltaTime;
     }
 
+    //=========================================================
+    // DrinkCoffee
+    //=========================================================
     void DrinkCoffee()
     {
         if(coffeeCD < 0)

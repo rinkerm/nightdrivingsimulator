@@ -4,7 +4,9 @@ using UnityEngine;
 
 public class Window : MonoBehaviour
 {
-
+    //=========================================================
+    // GUI Stuff
+    //=========================================================
     public float barDisplay; //current progress
     public Vector2 pos = new Vector2(240, 500);
     public Vector2 size = new Vector2(60, 20);
@@ -40,11 +42,17 @@ public class Window : MonoBehaviour
         GUI.EndGroup();
     }
 
-
+    //=========================================================
+    // Declarations
+    //=========================================================
     public Player_Status p_status;
     private Color startcolor = Color.white;
     private float windowCD = 0f;
     private int windowCDL = 20;
+
+    //=========================================================
+    // Mouse Stuff
+    //=========================================================
     void OnMouseEnter()
     {
         GetComponent<Renderer>().material.SetColor("_Color", Color.blue);
@@ -59,12 +67,18 @@ public class Window : MonoBehaviour
         MoveWindow();
     }
 
+    //=========================================================
+    // Update
+    //=========================================================
     void Update()
     {
         barDisplay = windowCD / 20f;
         windowCD -= Time.deltaTime;
     }
 
+    //=========================================================
+    // MoveWindow
+    //=========================================================
     void MoveWindow()
     {
         if (windowCD < 0)

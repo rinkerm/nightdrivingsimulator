@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class Player_Status : MonoBehaviour
 {
+    //=========================================================
+    // Declarations
+    //=========================================================
     [SerializeField] GameObject top_eyelid;
     [SerializeField] GameObject bottom_eyelid;
     public float b_speed = .25f;
@@ -15,6 +18,10 @@ public class Player_Status : MonoBehaviour
     private int timer = 0;
     private int fatigue_threshold = 60;
 
+
+    //=========================================================
+    // GUI Stuff
+    //=========================================================
     public float barDisplay; //current progress
     public Vector2 pos = new Vector2(20, 500);
     public Vector2 size = new Vector2(120, 20);
@@ -50,7 +57,9 @@ public class Player_Status : MonoBehaviour
         GUI.EndGroup();
     }
 
-    // Start is called before the first frame update
+    //=========================================================
+    // Start
+    //=========================================================
     void Start()
     {
         fullTex = new Texture2D(1, 1);
@@ -58,7 +67,9 @@ public class Player_Status : MonoBehaviour
         fullTex.Apply();
     }
 
-    // Update is called once per frame
+    //=========================================================
+    // Update
+    //=========================================================
     void Update()
     {
         barDisplay = fatigue*0.01f;
@@ -91,6 +102,9 @@ public class Player_Status : MonoBehaviour
         b_speed = System.Math.Max(.25f - (fatigue / 425),.01f);
     }
 
+    //=========================================================
+    // Blink
+    //=========================================================
     IEnumerator blink()
     {
         blinking = true;
@@ -110,6 +124,9 @@ public class Player_Status : MonoBehaviour
         blinking = false;
     }
 
+    //=========================================================
+    // LowerFatigue
+    //=========================================================
     public void LowerFatigue()
     {
         fatigue = System.Math.Max(0, fatigue - 10);

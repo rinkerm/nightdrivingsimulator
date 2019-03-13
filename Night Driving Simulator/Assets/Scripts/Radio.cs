@@ -5,6 +5,9 @@ using UnityEngine;
 public class Radio : MonoBehaviour
 {
 
+    //=========================================================
+    // GUI Stuff
+    //=========================================================
     public float barDisplay; //current progress
     public Vector2 pos = new Vector2(330, 500);
     public Vector2 size = new Vector2(60, 20);
@@ -40,11 +43,17 @@ public class Radio : MonoBehaviour
         GUI.EndGroup();
     }
 
+    //=========================================================
+    // Declarations
+    //=========================================================
     private Color startcolor = Color.white;
     public Player_Status p_status;
     private float radioCD = 0f;
     private int radioCDL = 60;
 
+    //=========================================================
+    // Mouse Stuff
+    //=========================================================
     void OnMouseEnter()
     {
         GetComponent<Renderer>().material.SetColor("_Color",Color.blue);
@@ -53,18 +62,23 @@ public class Radio : MonoBehaviour
     {
         GetComponent<Renderer>().material.SetColor("_Color",startcolor);
     }
-
     void OnMouseDown()
     {
         ChangeRadio();
     }
 
+    //=========================================================
+    // Update
+    //=========================================================
     void Update()
     {
         barDisplay = radioCD / 60f;
         radioCD -= Time.deltaTime;
     }
 
+    //=========================================================
+    // ChangeRadio
+    //=========================================================
     void ChangeRadio()
     {
         if (radioCD < 0)

@@ -4,7 +4,10 @@ using UnityEngine;
 
 public class MouseLook : MonoBehaviour
 {
-    
+
+    //=========================================================
+    // Declarations
+    //=========================================================
     public float sensitivityHor = 9.0f;
     public float sensitivityVert = 9.0f;
     public float minimumVert = -20.0f;
@@ -13,7 +16,10 @@ public class MouseLook : MonoBehaviour
     public float maximumHor = 60f;
     private float _rotationX = 0;
     private float _rotationY = 0;
-    // Start is called before the first frame update
+
+    //=========================================================
+    // Start
+    //=========================================================
     void Start()
     {
         Rigidbody body = GetComponent<Rigidbody>();
@@ -23,7 +29,9 @@ public class MouseLook : MonoBehaviour
         }
     }
 
-    // Update is called once per frame
+    //=========================================================
+    // Update
+    //=========================================================
     void Update()
     {
 		_rotationX -= Input.GetAxis("Mouse Y") * sensitivityVert;

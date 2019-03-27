@@ -40,8 +40,7 @@ public class Car : MonoBehaviour
     //=========================================================
     void Update()
     {
-        //constant downward force for stability
-        rb.AddRelativeForce(Vector3.down * 1000);
+        //Terrain.activeTerrain.SampleHeight(transform.position)+ 1.0f;
         //display speed to terminal
         //Debug.Log(speed.ToString());
 
@@ -85,7 +84,7 @@ public class Car : MonoBehaviour
                 rb.velocity += transform.forward * forwardForce/4  * Time.deltaTime;
                 dir = 1;
             }
-            else if (speed >= 20 && speed < 40)
+            else if (speed >= 20 && speed < 25)
             { 
                 rb.velocity += transform.forward * forwardForce/5 * Time.deltaTime;
                 dir = 1;

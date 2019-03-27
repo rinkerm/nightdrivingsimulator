@@ -50,6 +50,8 @@ public class Radio : MonoBehaviour
     public Player_Status p_status;
     private float radioCD = 0f;
     private int radioCDL = 60;
+    public AudioClip music1;
+    public AudioSource MusicSource;
 
     //=========================================================
     // Mouse Stuff
@@ -65,6 +67,11 @@ public class Radio : MonoBehaviour
     void OnMouseDown()
     {
         ChangeRadio();
+    }
+
+    void Start()
+    {
+        MusicSource.clip = music1;
     }
 
     //=========================================================
@@ -86,6 +93,8 @@ public class Radio : MonoBehaviour
             //translatewindow
             p_status.LowerFatigue();
             radioCD = radioCDL;
+
+            MusicSource.PlayOneShot(music1);
         }
     }
 }

@@ -17,7 +17,7 @@ public class Player_Status : MonoBehaviour
     private bool blinking = false;
     private float fatigue = 0;
     private int timer = 0;
-    private int fatigue_threshold = 60;
+    private int fatigue_threshold = 30;
     public bool closed;
 
 

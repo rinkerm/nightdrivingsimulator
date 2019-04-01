@@ -9,7 +9,11 @@ public class CameraSpin : MonoBehaviour
     {
 
         if (GUI.Button(new Rect(Screen.width / 2 - 50, Screen.height / 2 +100, 100, 50), "Play")){
-            SceneManager.LoadScene("forest_level");
+            SceneManager.LoadScene("mountains_level");
+        }
+        if (GUI.Button(new Rect(Screen.width / 2 - 50, Screen.height / 2 + 200, 100, 50), "Credits"))
+        {
+            SceneManager.LoadScene("credits");
         }
     }
 

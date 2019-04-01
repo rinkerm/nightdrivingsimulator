@@ -13,11 +13,11 @@ public class Player_Status : MonoBehaviour
     public float b_speed = .25f;
     public float b_time = 0.1f;
     private int b_timer = 0;
-    private int b_threshhold = 600;
+    private int b_threshhold = 150;
     private bool blinking = false;
     private float fatigue = 0;
     private int timer = 0;
-    private int fatigue_threshold = 60;
+    private int fatigue_threshold = 15;
     public bool closed;
 
 
@@ -109,7 +109,7 @@ public class Player_Status : MonoBehaviour
                 }
             }
             b_time = 0.1f + (fatigue / 175);
-            b_speed = System.Math.Max(.25f - (fatigue / 425),.01f);
+            b_speed = System.Math.Max(.25f - (fatigue / 400f),.01f);
         }
         if (fatigue >= 100)
         {
@@ -177,9 +177,9 @@ public class Player_Status : MonoBehaviour
     //=========================================================
     // LowerFatigue
     //=========================================================
-    public void LowerFatigue()
+    public void LowerFatigue(int amt)
     {
-        fatigue = System.Math.Max(0, fatigue - 10);
+        fatigue = System.Math.Max(0, fatigue - amt);
     }
     
 }

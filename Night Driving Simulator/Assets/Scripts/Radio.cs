@@ -49,8 +49,10 @@ public class Radio : MonoBehaviour
     private Color startcolor = Color.white;
     public Player_Status p_status;
     private float radioCD = 0f;
-    private int radioCDL = 60;
-    public AudioClip music1;
+    private int radioCDL = 30;
+
+    private int punk = 0;
+    public AudioClip[] music;
     public AudioSource MusicSource;
 
     //=========================================================
@@ -71,7 +73,9 @@ public class Radio : MonoBehaviour
 
     void Start()
     {
-        MusicSource.clip = music1;
+        
+        MusicSource.clip=music[0];
+        MusicSource.Play();
     }
 
     //=========================================================
@@ -81,6 +85,11 @@ public class Radio : MonoBehaviour
     {
         barDisplay = radioCD / 60f;
         radioCD -= Time.deltaTime;
+        if(radioCD<0 && punk == 1){
+            punk = 0; 
+            MusicSource.clip = music[0];
+            MusicSource.Play();
+        }
     }
 
     //=========================================================
@@ -90,11 +99,13 @@ public class Radio : MonoBehaviour
     {
         if (radioCD < 0)
         {
+            punk = 1;
             //translatewindow
-            p_status.LowerFatigue();
+            p_status.LowerFatigue(30);
             radioCD = radioCDL;
 
-            MusicSource.PlayOneShot(music1);
+            MusicSource.clip = music[1];
+            MusicSource.Play();
         }
     }
 }

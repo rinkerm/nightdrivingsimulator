@@ -26,7 +26,7 @@ public class crash : MonoBehaviour
             Debug.Log(other.gameObject.name.ToString());
             // this.enabled = false;
             //StartCoroutine(GameOver());
-            SceneManager.LoadScene("forest_level");
+            SceneManager.LoadScene("gameover");
         
         }
     }

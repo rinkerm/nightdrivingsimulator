@@ -49,7 +49,7 @@ public class Coffee : MonoBehaviour
     private Color startcolor = Color.white;
     public Player_Status p_status;
     private float coffeeCD = 0f;
-    private int coffeeCDL = 15;
+    private int coffeeCDL = 10;
 
     //=========================================================
     // Mouse Click Stuff
@@ -85,7 +85,7 @@ public class Coffee : MonoBehaviour
         if(coffeeCD < 0)
         {
                //playCoffeeDrinkSound
-               p_status.LowerFatigue();
+               p_status.LowerFatigue(20);
             coffeeCD = coffeeCDL;
         }
         

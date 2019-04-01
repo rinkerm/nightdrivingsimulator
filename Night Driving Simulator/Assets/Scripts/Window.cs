@@ -84,7 +84,7 @@ public class Window : MonoBehaviour
         if (windowCD < 0)
         {
             //translatewindow
-            p_status.LowerFatigue();
+            p_status.LowerFatigue(30);
             windowCD = windowCDL;
         }
     }
